@@ -1,6 +1,7 @@
 package com.dmb.activitatdialegs;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvDate, tvHour, tvColor;
     private Calendar myCalendar;
     private DatePickerDialog date;
-    private Button btnDate;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +31,12 @@ public class MainActivity extends AppCompatActivity {
         tvDate = findViewById(R.id.tvDate);
         tvHour = findViewById(R.id.tvHour);
         tvColor = findViewById(R.id.tvColor);
-        btnDate = findViewById(R.id.btnDate);
 
+    }
+
+    public void datePicker(View v) {
         date = new DatePickerDialog(this);
         date.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
-
 
           @Override
           public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -46,13 +47,10 @@ public class MainActivity extends AppCompatActivity {
               myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
               updateLabel();
           }
-      }
+        }
 
         );
 
-    }
-
-    public void datePicker(View v) {
         date.show();
     }
 
@@ -60,13 +58,24 @@ public class MainActivity extends AppCompatActivity {
         String myFormat = "dd/MM/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
 
-        tvDate.setText(sdf.format(myCalendar.getTime()));
+        tvDate.setText("Fecha: "+sdf.format(myCalendar.getTime()));
     }
 
-
-
     public void dialogHourPicker(View v) {
-        
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        tvHour.setText("Hora: "+hourOfDay + ":" + minute);
+                    }
+                } ,hour, minute, true);
+        timePickerDialog.show();
     }
 
     public void dialogColors(View v) {

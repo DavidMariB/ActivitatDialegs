@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="HORA"
-        android:layout_below="@+id/btnDate"/>
+        android:layout_below="@+id/btnDate"
+        android:onClick="dialogHourPicker"/>
 
     <Button
         android:id="@+id/btnColor"
@@ -35,18 +36,24 @@
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tvHour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvDate"/>
+        android:layout_below="@+id/tvDate"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tvColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvHour"/>
+        android:layout_below="@id/tvHour"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
 </android.widget.RelativeLayout>
