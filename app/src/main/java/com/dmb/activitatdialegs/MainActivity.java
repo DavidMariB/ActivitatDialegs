@@ -3,6 +3,7 @@ package com.dmb.activitatdialegs;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.icu.text.TimeZoneFormat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -66,13 +67,13 @@ public class MainActivity extends AppCompatActivity {
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
 
-
         TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this,
                 new TimePickerDialog.OnTimeSetListener() {
 
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        tvHour.setText("Hora: "+hourOfDay + ":" + minute);
+                        final String curTime = String.format("%02d:%02d", hourOfDay, minute);
+                        tvHour.setText("Hora: "+curTime);
                     }
                 } ,hour, minute, true);
         timePickerDialog.show();
@@ -83,23 +84,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("Elige un Color")
                 .setItems(R.array.colores, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialeg, int posicio) {
-                        switch (posicio) {
-                            case 0:
-                                tvColor.setText("Color: Rojo");
-                                break;
-                            case 1:
-                                tvColor.setText("Color: Azul");
-                                break;
-                            case 2:
-                                tvColor.setText("Color: Verde");
-                                break;
-                            case 3:
-                                tvColor.setText("Color: Negro");
-                                break;
-                            case 4:
-                                tvColor.setText("Color: Blanco");
-                                break;
-                        }
+                        tvColor.setText("Color: "+getResources().getStringArray(R.array.colores)[posicio]);
                     }
                 });
 
